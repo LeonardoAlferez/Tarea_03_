@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Proyecto Sesion 1</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    //Nombre del producto
+    <string name="textMac">MacBook Pro 17\"</string>
+    <string name="textAlien">AlienWare</string>
+    <string name="textLanix">Lanix</string>
+
+    //Tienda
+    <string name="textBestBuy">BestBuy</string>
+    <string name="textOffice">Office Depot</string>
+    <string name="textCostco">Costco</string>
+
+    //Direccion
+    <string name="textLocationMac">Zapopan, Jalisco</string>
+    <string name="textLocationAlien">Guadalajara, Jalisco</string>
+    <string name="textLocationLanix">Tlaquepaque, Jalisco</string>
+
+    //Teléfono
+    <string name="textPhoneMac">3312345678</string>
+    <string name="textPhoneAlien">3338068798</string>
+    <string name="textPhoneLanix">3311515068</string>
+
+    //Descripcion
+    <string name="textDescriptionMac">This is great like you</string>
+    <string name="textDescriptionAlien">The power for your</string>
+    <string name="textDescriptionLanix">Just for intelligent people</string>
+
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
