@@ -1,6 +1,7 @@
 package com.example.leo_c.proyectosesion1;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.leo_c.proyectosesion1.beans.ItemProduct;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by leo_c on 02/03/2018.
@@ -24,7 +26,7 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_technology, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.fragment_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.fragment_technology_recycler_view);
 
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -38,6 +40,7 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
                 getResources().getString(R.string.textPhoneMac),
                 0,
                 getResources().getString(R.string.textDescriptionMac),
+                0,
                 0));
 
         products.add(new ItemProduct(getResources().getString(R.string.textAlien),
@@ -46,6 +49,7 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
                 getResources().getString(R.string.textPhoneAlien),
                 1,
                 getResources().getString(R.string.textDescriptionAlien),
+                1,
                 1));
 
         products.add(new ItemProduct(getResources().getString(R.string.textLanix),
@@ -54,10 +58,29 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
                 getResources().getString(R.string.textPhoneLanix),
                 2,
                 getResources().getString(R.string.textDescriptionLanix),
+                2,
                 2));
 
         AdapterProduct adapterProduct = new AdapterProduct(getActivity(),products);
         recyclerView.setAdapter(adapterProduct);
         return view;
+    }
+
+    ArrayList<ItemProduct> products;
+    private RecyclerView.Adapter adapter;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ItemProduct itemProduct = data.getParcelableExtra("ITEM");
+        Iterator<ItemProduct> iterator = products.iterator();
+        int position = 0;
+        while(iterator.hasNext()){
+            ItemProduct item = iterator.next();
+            if(item.getCode() == itemProduct.getCode()){
+                products.set(position, itemProduct);
+                break;
+            }
+            position++;
+        }
+        adapter.notifyDataSetChanged();
     }
 }

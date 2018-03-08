@@ -136,27 +136,27 @@ public class ActivityMain extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             ArrayList<ItemProduct> products = new ArrayList<>();
-//            products.add(new ItemProduct(getResources().getString(R.string.textMac),
-//                                        getResources().getString(R.string.textBestBuy),
-//                                        getResources().getString(R.string.textLocationMac),
-//                                        getResources().getString(R.string.textPhoneMac),
-//                                        0,
-//                                        getResources().getString(R.string.textDescriptionMac),
-//                                        0));
-//            products.add(new ItemProduct(getResources().getString(R.string.textAlien),
-//                                        getResources().getString(R.string.textOffice),
-//                                        getResources().getString(R.string.textLocationAlien),
-//                                        getResources().getString(R.string.textPhoneAlien),
-//                                        1,
-//                                        getResources().getString(R.string.textDescriptionAlien),
-//                                        1));
-//            products.add(new ItemProduct(getResources().getString(R.string.textLanix),
-//                                        getResources().getString(R.string.textCostco),
-//                                        getResources().getString(R.string.textLocationLanix),
-//                                        getResources().getString(R.string.textPhoneLanix),
-//                                        2,
-//                                        getResources().getString(R.string.textDescriptionLanix),
-//                                        2));
+            products.add(new ItemProduct(getResources().getString(R.string.textMac),
+                                        getResources().getString(R.string.textBestBuy),
+                                        getResources().getString(R.string.textLocationMac),
+                                        getResources().getString(R.string.textPhoneMac),
+                                        0,
+                                        getResources().getString(R.string.textDescriptionMac),
+                                        0,0));
+            products.add(new ItemProduct(getResources().getString(R.string.textAlien),
+                                        getResources().getString(R.string.textOffice),
+                                        getResources().getString(R.string.textLocationAlien),
+                                        getResources().getString(R.string.textPhoneAlien),
+                                        1,
+                                        getResources().getString(R.string.textDescriptionAlien),
+                                        1,1));
+            products.add(new ItemProduct(getResources().getString(R.string.textLanix),
+                                        getResources().getString(R.string.textCostco),
+                                        getResources().getString(R.string.textLocationLanix),
+                                        getResources().getString(R.string.textPhoneLanix),
+                                        2,
+                                        getResources().getString(R.string.textDescriptionLanix),
+                                        2,2));
 
             AdapterProduct adapterProduct = new AdapterProduct(getActivity(),products);
             recyclerView.setAdapter((adapterProduct));
