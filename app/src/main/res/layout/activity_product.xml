@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.leo_c.proyectosesion1.ActivityProduct">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="@dimen/widthZero"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/activity_product_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightImage"
+            android:scaleType="centerInside"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <EditText
+                android:id="@+id/activity_product_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <EditText
+                android:id="@+id/activity_product_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/store"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <EditText
+                android:id="@+id/activity_product_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/location"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <EditText
+                android:id="@+id/activity_product_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
+                android:inputType="number"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activity_product_save"
+            android:layout_width="@dimen/widthZero"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btnSave"/>
+
+        <Button
+            android:id="@+id/activity_product_cancel"
+            android:layout_width="@dimen/widthZero"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btnCancel"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -102,7 +102,26 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                 Toast.makeText(context, products.get(position).toString(),Toast.LENGTH_LONG).show();
             }
         });
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ItemProduct itemProduct = new ItemProduct(products.get(position).getTitle(),
+                                                        products.get(position).getStore(),
+                                                        products.get(position).getLocation(),
+                                                        products.get(position).getPhone(),
+                                                        products.get(position).getImage(),
+                                                        products.get(position).getDescription(),
+                                                        products.get(position).getLocal_image(),
+                                                        products.get(position).getCode());
+                Intent intent = new Intent(context, ActivityProduct.class);
+                intent.putExtra("ITEM", itemProduct);
+                ((ActivityMain)context).startActivityForResult(intent,products.get(position).getCode());
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {

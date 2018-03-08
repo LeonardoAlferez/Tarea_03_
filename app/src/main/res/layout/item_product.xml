@@ -12,7 +12,7 @@
     <RelativeLayout
         android:id="@+id/item_product_layout"
         android:layout_width="match_parent"
-        android:layout_height="320dp">
+        android:layout_height="@dimen/heightCard">
 
         <ImageView
             android:id="@+id/item_product_image"
@@ -25,7 +25,7 @@
         <TextView
             android:id="@+id/item_product_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/heightImage"
             android:layout_alignBottom="@id/item_product_image"
             android:layout_gravity="bottom"
             android:background="#66000000"
@@ -48,7 +48,7 @@
             <ImageView
                 android:contentDescription="@string/app_name"
                 android:id="@+id/item_product_thumbnail"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/widthZero"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.2"
@@ -57,7 +57,7 @@
             </ImageView>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/widthZero"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0.8"
@@ -96,7 +96,7 @@
             android:layout_alignStart="@id/card_home_info"
             android:layout_below="@id/card_home_info"
             android:background="?android:attr/selectableItemBackground"
-            android:text="SHARE"
+            android:text="@string/textShare"
             android:textColor="@android:color/black"/>
 
         <Button
@@ -106,19 +106,10 @@
             android:layout_below="@id/card_home_info"
             android:layout_toEndOf="@id/item_product_share"
             android:background="?android:attr/selectableItemBackground"
-            android:text="SEE MORE"
+            android:text="@string/textSee"
             android:textColor="#03A9F4"/>
 
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent">-->
 
-        <!--<ImageView-->
-        <!--android:id="@id/item_product_image_alien"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/alienware"/>-->
-        <!--</LinearLayout>-->
     </RelativeLayout>
 </android.support.v7.widget.CardView>

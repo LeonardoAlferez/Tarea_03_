@@ -2,18 +2,46 @@ package com.example.leo_c.proyectosesion1.beans;
 
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by leo_c on 26/02/2018.
  */
 
-public class ItemProduct {
+public class ItemProduct implements Parcelable{
     private int local_image;
     private int image;
     private String title;
     private String store;
     private String phone;
     private String location;
+    private int code;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeString(title);
+        dest.writeString(store);
+        dest.writeString(location);
+        dest.writeString(phone);
+        dest.writeString(description);
+        dest.writeInt(code);
+        dest.writeInt(image);
+
+    }
 
     public String getDescription() {
         return description;
@@ -46,7 +74,15 @@ public class ItemProduct {
         this.location = location;
     }
 
-    public ItemProduct(){}
+    public ItemProduct(Parcel in){
+        image = in.readInt();
+        code = in.readInt();
+        title = in.readString();
+        store = in.readString();
+        location= in.readString();
+        phone = in.readString();
+        description = in.readString();
+    }
 
     public int getLocal_image() {
         return local_image;
@@ -64,7 +100,7 @@ public class ItemProduct {
         this.title = title;
     }
 
-    public ItemProduct(String title, String store, String location, String phone, int image,String description, int local_image) {
+    public ItemProduct(String title, String store, String location, String phone, int image,String description, int local_image, int code) {
         this.title = title;
         this.store = store;
         this.phone = phone;
@@ -72,6 +108,29 @@ public class ItemProduct {
         this.image = image;
         this.local_image = local_image;
         this.description = description;
+        this.code = code;
+    }
+
+
+    public static final Parcelable.Creator<ItemProduct> CREATOR = new Parcelable.Creator<ItemProduct>() {
+        @Override
+        public ItemProduct createFromParcel(Parcel source) {
+            return new ItemProduct(source);
+        }
+
+        @Override
+        public ItemProduct[] newArray(int size) {
+            return new ItemProduct[size];
+        }
+    };
+
+    public ItemProduct(){
+        title = "";
+        store = "";
+        phone = "";
+        location = "";
+        description = "";
+        image = 0;
     }
 
     @Override

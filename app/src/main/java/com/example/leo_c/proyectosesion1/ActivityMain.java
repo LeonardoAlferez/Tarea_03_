@@ -1,5 +1,7 @@
 package com.example.leo_c.proyectosesion1;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -38,7 +40,7 @@ public class ActivityMain extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    public FragmentTechnology fragmentTechnology;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -49,8 +51,8 @@ public class ActivityMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        TabLayout tabLayout =  findViewById(R.id.tabs);
 
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -58,12 +60,12 @@ public class ActivityMain extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager =  findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -134,27 +136,27 @@ public class ActivityMain extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             ArrayList<ItemProduct> products = new ArrayList<>();
-            products.add(new ItemProduct(getResources().getString(R.string.textMac),
-                                        getResources().getString(R.string.textBestBuy),
-                                        getResources().getString(R.string.textLocationMac),
-                                        getResources().getString(R.string.textPhoneMac),
-                                        0,
-                                        getResources().getString(R.string.textDescriptionMac),
-                                        0));
-            products.add(new ItemProduct(getResources().getString(R.string.textAlien),
-                                        getResources().getString(R.string.textOffice),
-                                        getResources().getString(R.string.textLocationAlien),
-                                        getResources().getString(R.string.textPhoneAlien),
-                                        1,
-                                        getResources().getString(R.string.textDescriptionAlien),
-                                        1));
-            products.add(new ItemProduct(getResources().getString(R.string.textLanix),
-                                        getResources().getString(R.string.textCostco),
-                                        getResources().getString(R.string.textLocationLanix),
-                                        getResources().getString(R.string.textPhoneLanix),
-                                        2,
-                                        getResources().getString(R.string.textDescriptionLanix),
-                                        2));
+//            products.add(new ItemProduct(getResources().getString(R.string.textMac),
+//                                        getResources().getString(R.string.textBestBuy),
+//                                        getResources().getString(R.string.textLocationMac),
+//                                        getResources().getString(R.string.textPhoneMac),
+//                                        0,
+//                                        getResources().getString(R.string.textDescriptionMac),
+//                                        0));
+//            products.add(new ItemProduct(getResources().getString(R.string.textAlien),
+//                                        getResources().getString(R.string.textOffice),
+//                                        getResources().getString(R.string.textLocationAlien),
+//                                        getResources().getString(R.string.textPhoneAlien),
+//                                        1,
+//                                        getResources().getString(R.string.textDescriptionAlien),
+//                                        1));
+//            products.add(new ItemProduct(getResources().getString(R.string.textLanix),
+//                                        getResources().getString(R.string.textCostco),
+//                                        getResources().getString(R.string.textLocationLanix),
+//                                        getResources().getString(R.string.textPhoneLanix),
+//                                        2,
+//                                        getResources().getString(R.string.textDescriptionLanix),
+//                                        2));
 
             AdapterProduct adapterProduct = new AdapterProduct(getActivity(),products);
             recyclerView.setAdapter((adapterProduct));
@@ -203,5 +205,13 @@ public class ActivityMain extends AppCompatActivity {
             }
             return null;
         }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 0 || requestCode == 1 || requestCode == 2)
+            if(resultCode == Activity.RESULT_OK)
+                fragmentTechnology.onActivityResult(requestCode,resultCode, data);
     }
 }

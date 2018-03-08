@@ -28,6 +28,19 @@
     <string name="textDescriptionAlien">The power for your</string>
     <string name="textDescriptionLanix">Just for intelligent people</string>
 
+    <string name="title">Título</string>
+    <string name="store">Tienda</string>
+    <string name="location">Localización</string>
+    <string name="phone">Teléfono</string>
+
+
+    <string name="textSee">SEE MORE</string>
+    <string name="textShare">SHARE</string>
+
+
+    <string name="btnSave">Save</string>
+    <string name="btnCancel">Cancel</string>
+
 
 
 
