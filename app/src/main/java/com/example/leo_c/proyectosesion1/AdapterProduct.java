@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.leo_c.proyectosesion1.beans.ItemProduct;
 
 import java.util.ArrayList;
+import java.util.ArrayList.*;
 
 /**
  * Created by leo_c on 26/02/2018.
@@ -25,9 +26,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
     ArrayList<ItemProduct> products;
     Context context;
-    public AdapterProduct(Context context, ArrayList<ItemProduct> products)
+    public AdapterProduct(Context context, ArrayList<ItemProduct> myDataSet)
     {
-        this.products = products;
+        products = myDataSet;
         this.context = context;
     }
 
@@ -45,14 +46,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 //
         public ViewHolder(View view){
             super(view);
-            layout = view.findViewById(R.id.item_product_layout);
-            detail = view.findViewById(R.id.item_product_detail);
-            title = view.findViewById(R.id.item_product_title);
-            store = view.findViewById(R.id.item_product_store);
-            location = view.findViewById(R.id.item_product_location);
-            phone = view.findViewById(R.id.item_product_phone);
-            image = view.findViewById(R.id.item_product_image);
-            thumbnail = view.findViewById(R.id.item_product_thumbnail);
+            layout = (RelativeLayout) view.findViewById(R.id.item_product_layout);
+            detail = (Button) view.findViewById(R.id.item_product_detail);
+            title = (TextView) view.findViewById(R.id.item_product_title);
+            store = (TextView) view.findViewById(R.id.item_product_store);
+            location = (TextView) view.findViewById(R.id.item_product_location);
+            phone = (TextView) view.findViewById(R.id.item_product_phone);
+            image =(ImageView) view.findViewById(R.id.item_product_image);
+            thumbnail = (ImageView) view.findViewById(R.id.item_product_thumbnail);
 
         }
 
@@ -60,10 +61,10 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        return viewHolder;
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_product, parent, false);
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
     }
 
     @Override
@@ -92,7 +93,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("Tel: "+products.get(position).getPhone()));
-                v.getContext().startActivity(intent);
+                context.startActivity(intent);
             }
         });
 
@@ -107,13 +108,13 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             @Override
             public void onClick(View v) {
                 ItemProduct itemProduct = new ItemProduct(products.get(position).getTitle(),
-                                                        products.get(position).getStore(),
-                                                        products.get(position).getLocation(),
-                                                        products.get(position).getPhone(),
-                                                        products.get(position).getImage(),
-                                                        products.get(position).getDescription(),
-                                                        products.get(position).getLocal_image(),
-                                                        products.get(position).getCode());
+                        products.get(position).getStore(),
+                        products.get(position).getLocation(),
+                        products.get(position).getPhone(),
+                        products.get(position).getImage(),
+                        products.get(position).getDescription(),
+                        products.get(position).getLocal_image(),
+                        products.get(position).getCode());
                 Intent intent = new Intent(context, ActivityProduct.class);
                 intent.putExtra("ITEM", itemProduct);
                 ((ActivityMain)context).startActivityForResult(intent,products.get(position).getCode());

@@ -112,31 +112,32 @@ public class ItemProduct implements Parcelable{
     }
 
 
-    public static final Parcelable.Creator<ItemProduct> CREATOR = new Parcelable.Creator<ItemProduct>() {
-        @Override
-        public ItemProduct createFromParcel(Parcel source) {
-            return new ItemProduct(source);
-        }
+    public static final Parcelable.Creator<ItemProduct> CREATOR =
+            new Parcelable.Creator<ItemProduct>(){
+                @Override
+                public ItemProduct createFromParcel(Parcel source) {
+                    return new ItemProduct(source);
+                }
 
-        @Override
-        public ItemProduct[] newArray(int size) {
-            return new ItemProduct[size];
-        }
-    };
+                @Override
+                public ItemProduct[] newArray(int size) {
+                    return new ItemProduct[size];
+                }
+            };
 
     public ItemProduct(){
+        image = 0;
         title = "";
         store = "";
-        phone = "";
         location = "";
+        phone = "";
         description = "";
-        image = 0;
     }
 
     @Override
     public String toString() {
         return "ItemProduct{" +
-                "tittle :" + title + '\'' +
+                "title :" + title + '\'' +
                 ", store :" + store + '\'' +
                 ", location :" + location + '\'' +
                 ", phone :" + phone + '\'' +

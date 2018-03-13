@@ -42,6 +42,13 @@
     <string name="btnCancel">Cancel</string>
 
 
+    <string name="textSplash">¡Bienvenido, amigo! a Productos ITESO</string>
+    <string name="btnLogin">Entrar</string>
+    <string name="textPass">Contraseña</string>
+    <string name="textLoginUser">Usuario</string>
+    <string name="textLoginPass">LogOut</string>
+    <string name="textPrivacy">Aviso de privacidad</string>
+    <string name="textLogout">LogOut</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

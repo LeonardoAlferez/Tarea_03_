@@ -19,22 +19,26 @@ import java.util.Iterator;
  */
 
 public class FragmentTechnology extends android.support.v4.app.Fragment {
+    private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<ItemProduct> myDataSet;
 
-    public FragmentTechnology() {
+    public FragmentTechnology(){
+
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_technology, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.fragment_technology_recycler_view);
 
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
+        myDataSet = new ArrayList<ItemProduct>();
+        //ArrayList<ItemProduct> products = new ArrayList<>();
 
-        ArrayList<ItemProduct> products = new ArrayList<>();
-
-        products.add(new ItemProduct(getResources().getString(R.string.textMac),
+        myDataSet.add(new ItemProduct(getResources().getString(R.string.textMac),
                 getResources().getString(R.string.textBestBuy),
                 getResources().getString(R.string.textLocationMac),
                 getResources().getString(R.string.textPhoneMac),
@@ -43,7 +47,7 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
                 0,
                 0));
 
-        products.add(new ItemProduct(getResources().getString(R.string.textAlien),
+        myDataSet.add(new ItemProduct(getResources().getString(R.string.textAlien),
                 getResources().getString(R.string.textOffice),
                 getResources().getString(R.string.textLocationAlien),
                 getResources().getString(R.string.textPhoneAlien),
@@ -52,7 +56,7 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
                 1,
                 1));
 
-        products.add(new ItemProduct(getResources().getString(R.string.textLanix),
+        myDataSet.add(new ItemProduct(getResources().getString(R.string.textLanix),
                 getResources().getString(R.string.textCostco),
                 getResources().getString(R.string.textLocationLanix),
                 getResources().getString(R.string.textPhoneLanix),
@@ -61,26 +65,24 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
                 2,
                 2));
 
-        AdapterProduct adapterProduct = new AdapterProduct(getActivity(),products);
-        recyclerView.setAdapter(adapterProduct);
+        mAdapter = new AdapterProduct(getActivity(), myDataSet);
+        recyclerView.setAdapter(mAdapter);
         return view;
     }
 
-    ArrayList<ItemProduct> products;
-    private RecyclerView.Adapter adapter;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         ItemProduct itemProduct = data.getParcelableExtra("ITEM");
-        Iterator<ItemProduct> iterator = products.iterator();
+        Iterator<ItemProduct> iterator = myDataSet.iterator();
         int position = 0;
         while(iterator.hasNext()){
             ItemProduct item = iterator.next();
             if(item.getCode() == itemProduct.getCode()){
-                products.set(position, itemProduct);
+                myDataSet.set(position, itemProduct);
                 break;
             }
             position++;
         }
-        adapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
 }

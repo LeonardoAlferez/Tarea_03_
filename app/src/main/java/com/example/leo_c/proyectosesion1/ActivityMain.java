@@ -2,6 +2,7 @@ package com.example.leo_c.proyectosesion1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -20,16 +21,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.leo_c.proyectosesion1.beans.ItemProduct;
 
 import java.util.ArrayList;
 
 public class ActivityMain extends AppCompatActivity {
-
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -40,19 +38,20 @@ public class ActivityMain extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    public FragmentTechnology fragmentTechnology;
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    public FragmentTechnology fragmentTechnology;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        TabLayout tabLayout =  findViewById(R.id.tabs);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -60,19 +59,18 @@ public class ActivityMain extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager =  findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab =  findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
         });
 
     }
@@ -92,14 +90,32 @@ public class ActivityMain extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id == R.id.action_logout){
+            SharedPreferences sharedPreferences = getSharedPreferences(
+                    "com.iteso.USER_PREFERENCES", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(ActivityMain.this,
+                    ActivityLogin.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                          | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_policy) {
+            Intent intent = new Intent(ActivityMain.this,
+                    ActivityPolicy.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
     }
-///////////////////////////
+
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -109,9 +125,6 @@ public class ActivityMain extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -126,44 +139,23 @@ public class ActivityMain extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_activity_main, container, false);
-            RecyclerView recyclerView =  rootView.findViewById(R.id.fragment_recycler_view);
+            /*TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));*/
+            RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
 
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(layoutManager);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(mLayoutManager);
 
             ArrayList<ItemProduct> products = new ArrayList<>();
-            products.add(new ItemProduct(getResources().getString(R.string.textMac),
-                                        getResources().getString(R.string.textBestBuy),
-                                        getResources().getString(R.string.textLocationMac),
-                                        getResources().getString(R.string.textPhoneMac),
-                                        0,
-                                        getResources().getString(R.string.textDescriptionMac),
-                                        0,0));
-            products.add(new ItemProduct(getResources().getString(R.string.textAlien),
-                                        getResources().getString(R.string.textOffice),
-                                        getResources().getString(R.string.textLocationAlien),
-                                        getResources().getString(R.string.textPhoneAlien),
-                                        1,
-                                        getResources().getString(R.string.textDescriptionAlien),
-                                        1,1));
-            products.add(new ItemProduct(getResources().getString(R.string.textLanix),
-                                        getResources().getString(R.string.textCostco),
-                                        getResources().getString(R.string.textLocationLanix),
-                                        getResources().getString(R.string.textPhoneLanix),
-                                        2,
-                                        getResources().getString(R.string.textDescriptionLanix),
-                                        2,2));
 
-            AdapterProduct adapterProduct = new AdapterProduct(getActivity(),products);
-            recyclerView.setAdapter((adapterProduct));
+            AdapterProduct adapterProduct = new AdapterProduct(getActivity(), products);
+            recyclerView.setAdapter(adapterProduct);
             return rootView;
         }
     }
-//////////////////
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -176,11 +168,12 @@ public class ActivityMain extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            switch (position){
+            switch (position) {
                 case 0:
-                    return new FragmentTechnology();
+                    if(fragmentTechnology == null) {
+                        fragmentTechnology = new FragmentTechnology();
+                    }
+                    return fragmentTechnology;
                 case 1:
                     return new FragmentHome();
                 case 2:
@@ -188,7 +181,7 @@ public class ActivityMain extends AppCompatActivity {
                 default:
                     return new FragmentTechnology();
             }
-        }
+        };
 
         @Override
         public int getCount() {
@@ -205,13 +198,14 @@ public class ActivityMain extends AppCompatActivity {
             }
             return null;
         }
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 0 || requestCode == 1 || requestCode == 2)
-            if(resultCode == Activity.RESULT_OK)
-                fragmentTechnology.onActivityResult(requestCode,resultCode, data);
+        if(requestCode == 0 || requestCode == 1 || requestCode == 2){
+            if(resultCode == Activity.RESULT_OK){
+                fragmentTechnology.onActivityResult(requestCode, resultCode, data);
+            }
+        }
     }
 }

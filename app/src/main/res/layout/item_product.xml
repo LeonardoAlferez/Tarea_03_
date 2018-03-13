@@ -12,12 +12,12 @@
     <RelativeLayout
         android:id="@+id/item_product_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/heightCard">
+        android:layout_height="@dimen/heightCard1">
 
         <ImageView
             android:id="@+id/item_product_image"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="190dp"
             android:contentDescription="@string/app_name"
             android:scaleType="centerInside"
             />
