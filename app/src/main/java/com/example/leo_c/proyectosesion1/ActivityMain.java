@@ -68,8 +68,8 @@ public class ActivityMain extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), ActivityItem.class);
+                startActivity(intent);
             }
         });
 
@@ -100,7 +100,7 @@ public class ActivityMain extends AppCompatActivity {
             Intent intent = new Intent(ActivityMain.this,
                     ActivityLogin.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                          | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         }
@@ -114,7 +114,6 @@ public class ActivityMain extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
     /**
      * A placeholder fragment containing a simple view.
@@ -139,7 +138,8 @@ public class ActivityMain extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_activity_main, container, false);
             /*TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));*/
@@ -208,4 +208,5 @@ public class ActivityMain extends AppCompatActivity {
             }
         }
     }
+
 }

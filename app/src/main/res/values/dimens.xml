@@ -10,4 +10,5 @@
     <dimen name="heightZero">0dp</dimen>
     <dimen name="widthZero">0dp</dimen>
     <dimen name="heightCard1">320dp</dimen>
+    <dimen name="three">3dp</dimen>
 </resources>

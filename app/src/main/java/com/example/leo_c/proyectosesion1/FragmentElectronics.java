@@ -11,10 +11,11 @@ import android.view.ViewGroup;
  * Created by leo_c on 02/03/2018.
  */
 
-public class FragmentElectronics extends android.support.v4.app.Fragment {
+public class FragmentElectronics extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_electronics, container, false);
         return view;
     }
+
 }

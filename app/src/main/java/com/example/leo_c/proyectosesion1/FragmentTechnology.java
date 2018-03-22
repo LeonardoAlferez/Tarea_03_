@@ -1,6 +1,5 @@
 package com.example.leo_c.proyectosesion1;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.leo_c.proyectosesion1.beans.ItemProduct;
+import com.example.leo_c.proyectosesion1.dataBase.DataBaseHandler;
+import com.example.leo_c.proyectosesion1.dataBase.ItemProductControl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,40 +31,15 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_technology, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.fragment_technology_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.fragment_technology_recycler_view);
 
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        myDataSet = new ArrayList<ItemProduct>();
-        //ArrayList<ItemProduct> products = new ArrayList<>();
 
-        myDataSet.add(new ItemProduct(getResources().getString(R.string.textMac),
-                getResources().getString(R.string.textBestBuy),
-                getResources().getString(R.string.textLocationMac),
-                getResources().getString(R.string.textPhoneMac),
-                0,
-                getResources().getString(R.string.textDescriptionMac),
-                0,
-                0));
-
-        myDataSet.add(new ItemProduct(getResources().getString(R.string.textAlien),
-                getResources().getString(R.string.textOffice),
-                getResources().getString(R.string.textLocationAlien),
-                getResources().getString(R.string.textPhoneAlien),
-                1,
-                getResources().getString(R.string.textDescriptionAlien),
-                1,
-                1));
-
-        myDataSet.add(new ItemProduct(getResources().getString(R.string.textLanix),
-                getResources().getString(R.string.textCostco),
-                getResources().getString(R.string.textLocationLanix),
-                getResources().getString(R.string.textPhoneLanix),
-                2,
-                getResources().getString(R.string.textDescriptionLanix),
-                2,
-                2));
+        ItemProductControl itemProductControl = new ItemProductControl();
+        myDataSet = itemProductControl.getProductsByCategory(0,
+                DataBaseHandler.getInstance(getActivity()));
 
         mAdapter = new AdapterProduct(getActivity(), myDataSet);
         recyclerView.setAdapter(mAdapter);

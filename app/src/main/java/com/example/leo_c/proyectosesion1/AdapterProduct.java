@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,40 +24,12 @@ import java.util.ArrayList.*;
  */
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder>{
+    ArrayList<ItemProduct> mDataSet;
+    private Context context;
 
-    ArrayList<ItemProduct> products;
-    Context context;
-    public AdapterProduct(Context context, ArrayList<ItemProduct> myDataSet)
-    {
-        products = myDataSet;
+    public AdapterProduct(Context context, ArrayList<ItemProduct> myDataSet){
+        mDataSet = myDataSet;
         this.context = context;
-    }
-
-
-
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        public Button detail;
-        public TextView title;
-        public TextView store;
-        public TextView location;
-        public TextView phone;
-        public ImageView image;
-        public ImageView thumbnail;
-        public RelativeLayout layout;
-//
-        public ViewHolder(View view){
-            super(view);
-            layout = (RelativeLayout) view.findViewById(R.id.item_product_layout);
-            detail = (Button) view.findViewById(R.id.item_product_detail);
-            title = (TextView) view.findViewById(R.id.item_product_title);
-            store = (TextView) view.findViewById(R.id.item_product_store);
-            location = (TextView) view.findViewById(R.id.item_product_location);
-            phone = (TextView) view.findViewById(R.id.item_product_phone);
-            image =(ImageView) view.findViewById(R.id.item_product_image);
-            thumbnail = (ImageView) view.findViewById(R.id.item_product_thumbnail);
-
-        }
-
     }
 
     @Override
@@ -67,65 +40,90 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         return vh;
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        public Button mDetail;
+        public TextView mProductTitle;
+        public TextView mProductStore;
+        public TextView mProductLocation;
+        public TextView mProductPhone;
+        public ImageView mProductImage;
+        public ImageView mProductThumbnail;
+        public RelativeLayout mEventLayout;
+
+        public ViewHolder(View v){
+            super(v);
+            mEventLayout = (RelativeLayout) v.findViewById(R.id.item_product_layout);
+            mDetail = (Button) v.findViewById(R.id.item_product_detail);
+            mProductTitle = (TextView) v.findViewById(R.id.item_product_title);
+            mProductStore = (TextView) v.findViewById(R.id.item_product_store);
+            mProductLocation = (TextView) v.findViewById(R.id.item_product_location);
+            mProductPhone = (TextView) v.findViewById(R.id.item_product_phone);
+            mProductImage = (ImageView) v.findViewById(R.id.item_product_image);
+            mProductThumbnail = (ImageView) v.findViewById(R.id.item_product_thumbnail);
+        }
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.title.setText(products.get(position).getTittle());
-        holder.store.setText(products.get(position).getStore());
-        holder.location.setText(products.get(position).getLocation());
-        holder.phone.setText(products.get(position).getPhone());
-        switch (products.get(position).getImage()){
+        holder.mProductTitle.setText(mDataSet.get(position).getTitle());
+        holder.mProductStore.setText(mDataSet.get(position).getStore().getName());
+        holder.mProductLocation.setText(mDataSet.get(position).getStore().getCity().getName() + ", Jalisco");
+        holder.mProductPhone.setText(mDataSet.get(position).getStore().getPhone());
+        switch(mDataSet.get(position).getImage()){
             case 0:
-                holder.image.setImageResource(R.drawable.mac); break;
+                holder.mProductImage.setImageResource(R.drawable.mac); break;
             case 1:
-                holder.image.setImageResource(R.drawable.alienware); break;
+                holder.mProductImage.setImageResource(R.drawable.alienware); break;
             case 2:
-                holder.image.setImageResource(R.drawable.lanix); break;
+                holder.mProductImage.setImageResource(R.drawable.lanix); break;
         }
-        switch (products.get(position).getLocal_image()){
+        switch(mDataSet.get(position).getStore().getId()){
             case 0:
-                holder.thumbnail.setImageResource(R.drawable.bestbuy); break;
+                holder.mProductThumbnail.setImageResource(R.drawable.bestbuy); break;
             case 1:
-                holder.thumbnail.setImageResource(R.drawable.dell); break;
+                holder.mProductThumbnail.setImageResource(R.drawable.dell); break;
             case 2:
-                holder.thumbnail.setImageResource(R.drawable.lanixs); break;
+                holder.mProductThumbnail.setImageResource(R.drawable.lanixs); break;
         }
-        holder.phone.setOnClickListener(new View.OnClickListener(){
+
+
+        holder.mDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("Tel: "+products.get(position).getPhone()));
+                Toast.makeText(context, mDataSet.get(position).toString(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        holder.mProductPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + mDataSet.get(position).getStore().getPhone()));
                 context.startActivity(intent);
             }
         });
 
-        holder.detail.setOnClickListener(new View.OnClickListener(){
+        holder.mProductImage.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                Toast.makeText(context, products.get(position).toString(),Toast.LENGTH_LONG).show();
-            }
-        });
+            public void onClick(View v){
+                ItemProduct itemProduct = new ItemProduct(
+                        mDataSet.get(position).getCode(),
+                        mDataSet.get(position).getTitle(),
+                        mDataSet.get(position).getDescription(),
+                        mDataSet.get(position).getImage(),
+                        mDataSet.get(position).getStore(),
+                        mDataSet.get(position).getCategory());
 
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ItemProduct itemProduct = new ItemProduct(products.get(position).getTitle(),
-                        products.get(position).getStore(),
-                        products.get(position).getLocation(),
-                        products.get(position).getPhone(),
-                        products.get(position).getImage(),
-                        products.get(position).getDescription(),
-                        products.get(position).getLocal_image(),
-                        products.get(position).getCode());
                 Intent intent = new Intent(context, ActivityProduct.class);
                 intent.putExtra("ITEM", itemProduct);
-                ((ActivityMain)context).startActivityForResult(intent,products.get(position).getCode());
+                ((ActivityMain) context).startActivityForResult(intent, mDataSet.get(position).getCode());
             }
         });
     }
 
-
-
     @Override
     public int getItemCount() {
-        return products.size();
+        return mDataSet.size();
     }
 }

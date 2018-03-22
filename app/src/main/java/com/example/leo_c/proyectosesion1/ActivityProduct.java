@@ -13,64 +13,67 @@ import com.example.leo_c.proyectosesion1.beans.ItemProduct;
 
 public class ActivityProduct extends AppCompatActivity {
 
-    ImageView imageView;
-    Button btnSave, btnCancel;
+    ImageView image;
     EditText title, store, location, phone;
-    ItemProduct product1, product2;
+    Button save, cancel;
+    ItemProduct myProduct, myProductB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-        imageView = findViewById(R.id.activity_product_image);
-        btnSave = findViewById(R.id.activity_product_save);
-        btnCancel = findViewById(R.id.activity_product_cancel);
+        image = findViewById(R.id.activity_product_image);
         title = findViewById(R.id.activity_product_title);
         store = findViewById(R.id.activity_product_store);
         location = findViewById(R.id.activity_product_location);
-        phone= findViewById(R.id.activity_product_phone);
+        phone = findViewById(R.id.activity_product_phone);
+
+        save = findViewById(R.id.activity_product_save);
+        cancel = findViewById(R.id.activity_product_cancel);
 
         if(getIntent().getExtras() != null){
-            product1 = getIntent().getParcelableExtra("ITEM");
-            if(product1 != null){
-                switch (product1.getImage()){
+            myProduct = getIntent().getParcelableExtra("ITEM");
+            if(myProduct != null){
+                switch (myProduct.getImage()){
                     case 0:
-                        imageView.setImageResource(R.drawable.mac);
+                        image.setImageResource(R.drawable.mac);
                         break;
                     case 1:
-                        imageView.setImageResource(R.drawable.alienware);
+                        image.setImageResource(R.drawable.alienware);
                         break;
                     case 2:
-                        imageView.setImageResource(R.drawable.lanix);
+                        image.setImageResource(R.drawable.lanix);
                         break;
-                        default: imageView.setImageResource(R.drawable.mac);
+                    default:
+                        image.setImageResource(R.drawable.mac);
                 }
-                title.setText(product1.getTittle());
-                store.setText(product1.getStore());
-                phone.setText(product1.getPhone());
-                location.setText(product1.getLocation());
-
+                title.setText(myProduct.getTitle());
+                store.setText(myProduct.getStore().getName());
+                location.setText(myProduct.getStore().getCity().getName());
+                phone.setText(myProduct.getStore().getPhone());
             }
         }
-        btnSave.setOnClickListener(new View.OnClickListener(){
+
+        save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                product2 = new ItemProduct();
-                product2.setTitle(title.getText().toString());
-                product2.setStore(store.getText().toString());
-                product2.setLocation(location.getText().toString());
-                product2.setPhone(phone.getText().toString());
-                product2.setCode(product1.getCode());
-                product2.setImage(product1.getImage());
+                myProductB = new ItemProduct();
+                myProductB.setTitle(title.getText().toString());
+                myProductB.getStore().setName(store.getText().toString());
+                myProductB.getStore().getCity().setName(location.getText().toString());
+                myProductB.getStore().setPhone(phone.getText().toString());
+                myProductB.setCode(myProduct.getCode());
+                myProductB.setImage(myProduct.getImage());
 
                 Intent intent = new Intent();
-                intent.putExtra("ITEM", product2);
+                intent.putExtra("ITEM", myProductB);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });
 
-        btnCancel.setOnClickListener(new View.OnClickListener(){
+        cancel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 setResult(RESULT_CANCELED);
@@ -78,4 +81,5 @@ public class ActivityProduct extends AppCompatActivity {
             }
         });
     }
+
 }

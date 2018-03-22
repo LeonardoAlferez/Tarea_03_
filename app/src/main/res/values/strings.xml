@@ -49,7 +49,21 @@
     <string name="textLoginPass">LogOut</string>
     <string name="textPrivacy">Aviso de privacidad</string>
     <string name="textLogout">LogOut</string>
+    <string name="image">Image</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="category">Category</string>
 
+
+    <string name="nav0">Technology</string>
+    <string name="nav1">Home</string>
+    <string name="nav2">Electronics</string>
+
+
+    <string-array name="images">
+        <item>"Mac"</item>
+        <item>"Alienware"</item>
+        <item>"Lanix"</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
